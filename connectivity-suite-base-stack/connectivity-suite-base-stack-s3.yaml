@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Base stack for getting started with 1nce'
+Parameters:
+  S3BucketName:
+    Type: String
+    Default: 1nce-data-streamer
+    Description: Enter the bucket name. This will be prefixed by your account name.
+    MaxLength: 50
+  DatastreamerRoleARN:
+    Type: String
+    Default: arn:aws:iam::884047677700:role/datastreamer
+    Description: The 1nce role that will be allowed to assume the role defined here with the purpose of submitting data. This role most likely doesn't change.
+  AllowedExternalID:
+    Type: String
+    Description: Enter external ID that matches the 
+Resources:
+  EncryptedS3Bucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Sub '${AWS::AccountId}-${S3BucketName}'
+      VersioningConfiguration:
+        Status: Enabled
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: 'AES256'
+
+  DataStreamerRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS:
+                - !Ref DatastreamerRoleARN
+            Action:
+              - 'sts:AssumeRole'
+            Condition: 
+              "ForAnyValue:StringEquals": 
+                "sts:ExternalId":
+                  - !Ref AllowedExternalID
+      Policies:
+        - PolicyName: allow-write-1nce-data-streamer-bucket
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: 's3:PutObject'
+                Resource: !Sub 'arn:aws:s3:::${EncryptedS3Bucket}/*'
+
+  S3BucketNameParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /1nce-data-streamer-bucket/name
+      Type: String
+      Value: !Ref EncryptedS3Bucket
+      Description: The name of the 1nce data streamer bucket
+      Tags:
+        heritage: cloudformation
