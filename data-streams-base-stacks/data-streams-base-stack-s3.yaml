@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: 'Base stack for getting started with 1nce'
+Description: 'Base stack for 1NCE Data Streamer S3 to get started'
 Parameters:
   S3BucketName:
     Type: String
