@@ -77,6 +77,6 @@ Outputs:
   S3Bucket:
     Description: S3 Bucket Name for the Data Streamer. Input in 1NCE Portal during configuration.
     Value: !Ref EncryptedS3Bucket
-  DataStreamerRole:
+  IAMRoleARN:
     Description: IAM Role ARN for the Data Streamer. Input in 1NCE Portal during configuration.
     Value: !GetAtt DataStreamerRole.Arn
