@@ -59,3 +59,24 @@ Resources:
       Description: The name of the 1nce data streamer bucket
       Tags:
         heritage: cloudformation
+
+  DataStreamerRoleParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /1nce-data-streamer-iam-role/name
+      Type: String
+      Value: !GetAtt DataStreamerRole.Arn
+      Description: The Data Streamer IAM Role of the 1nce data streamer S3 stream
+      Tags:
+        heritage: cloudformation
+
+Outputs:
+  AWSRegion:
+    Description: AWS Region for the Data Streamer. Input in 1NCE Portal during configuration.
+    Value: !Ref "AWS::Region"
+  S3Bucket:
+    Description: S3 Bucket Name for the Data Streamer. Input in 1NCE Portal during configuration.
+    Value: !Ref EncryptedS3Bucket
+  DataStreamerRole:
+    Description: IAM Role ARN for the Data Streamer. Input in 1NCE Portal during configuration.
+    Value: !GetAtt DataStreamerRole.Arn
