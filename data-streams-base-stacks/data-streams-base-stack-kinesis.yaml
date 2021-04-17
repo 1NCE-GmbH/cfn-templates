@@ -71,9 +71,9 @@ Outputs:
   AWSRegion:
     Description: AWS Region for the Data Streamer. Input in 1NCE Portal during configuration.
     Value: !Ref "AWS::Region"
-  KinesisStream:
+  StreamName:
     Description: Kinesis Stream Name for the Data Streamer. Input in 1NCE Portal during configuration.
     Value: !Ref KinesisStream
-  DataStreamerRole:
+  IAMRoleARN:
     Description: IAM Role ARN for the Data Streamer. Input in 1NCE Portal during configuration.
     Value: !GetAtt DataStreamerRole.Arn
