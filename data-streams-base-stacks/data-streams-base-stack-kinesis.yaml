@@ -8,7 +8,7 @@ Parameters:
     MaxLength: 50
   DatastreamerRoleARN:
     Type: String
-    Default: arn:aws:iam::884047677700:role/datastreamer
+    Default: arn:aws:iam::884047677700:role/1nce-datastreamer
     Description: The 1nce role that will be allowed to assume the role defined here with the purpose of submitting data. This role most likely doesn't change.
   AllowedExternalID:
     Type: String
