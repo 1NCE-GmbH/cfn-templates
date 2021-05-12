@@ -12,7 +12,7 @@ Parameters:
     Description: The 1nce role that will be allowed to assume the role defined here with the purpose of submitting data. This role most likely doesn't change.
   AllowedExternalID:
     Type: String
-    Description: Enter external ID that matches the 
+    Description: Enter external ID that matches the 1NCE internal Organisation ID. It follows the structure of org-1234. When creating via the Customer Portal it will be automaticall added.
 Resources:
   EncryptedS3Bucket:
     Type: 'AWS::S3::Bucket'
