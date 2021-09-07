@@ -45,7 +45,7 @@ Resources:
                 Action:
                   - 'Kinesis:PutRecord'
                   - 'Kinesis:PutRecords'
-                Resource: !Sub 'arn:aws:kinesis:::${KinesisStream}/*'
+                Resource: !Sub 'arn:aws:kinesis:${AWS::Region}:${AWS::AccountId}:stream/${KinesisStream}'
 
   KinesisStreamNameParameter:
     Type: AWS::SSM::Parameter
