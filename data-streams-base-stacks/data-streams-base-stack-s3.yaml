@@ -41,7 +41,7 @@ Resources:
                 "sts:ExternalId":
                   - !Ref AllowedExternalID
       Policies:
-        - PolicyName: allow-write-1nce-data-streamer-bucket
+        - PolicyName: !Join ['-', ['allow-write-1nce', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref AWS::StackId]]]]]]
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
