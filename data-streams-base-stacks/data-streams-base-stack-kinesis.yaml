@@ -17,7 +17,6 @@ Resources:
   KinesisStream:
     Type: 'AWS::Kinesis::Stream'
     Properties:
-      Name: !Sub '${AWS::AccountId}-${KinesisStreamName}'
       ShardCount: 1
 
   DataStreamerRole:
@@ -50,7 +49,6 @@ Resources:
   KinesisStreamNameParameter:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: /1nce-data-streamer-kinesis-stream/name
       Type: String
       Value: !Ref KinesisStream
       Description: The name of the 1nce data streamer kinesis stream
@@ -60,7 +58,6 @@ Resources:
   DataStreamerRoleParameter:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: /1nce-data-streamer-iam-role-s3/name
       Type: String
       Value: !GetAtt DataStreamerRole.Arn
       Description: The Data Streamer IAM Role of the 1nce data streamer kinesis stream

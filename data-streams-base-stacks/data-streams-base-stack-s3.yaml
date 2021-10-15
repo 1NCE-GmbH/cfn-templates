@@ -17,7 +17,6 @@ Resources:
   EncryptedS3Bucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: !Sub '${AWS::AccountId}-${S3BucketName}'
       VersioningConfiguration:
         Status: Enabled
       BucketEncryption:
@@ -53,7 +52,6 @@ Resources:
   S3BucketNameParameter:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: /1nce-data-streamer-bucket/name
       Type: String
       Value: !Ref EncryptedS3Bucket
       Description: The name of the 1nce data streamer bucket
@@ -63,7 +61,6 @@ Resources:
   DataStreamerRoleParameter:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: /1nce-data-streamer-iam-role-kinesis/name
       Type: String
       Value: !GetAtt DataStreamerRole.Arn
       Description: The Data Streamer IAM Role of the 1nce data streamer S3 stream
